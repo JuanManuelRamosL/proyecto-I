@@ -10,5 +10,12 @@ server.use(express.json());
 server.use(cors());
 
 server.use(router);
+server.get('/', (req, res) => {
+    res.send('¡Hola, mundo!');
+  });
 
+
+  
 module.exports = server;
+
+

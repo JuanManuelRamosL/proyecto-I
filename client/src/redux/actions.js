@@ -27,3 +27,16 @@ export const fetchDriver = (name) => {
   };
 };
 
+export const postDriver = (formData) => {
+  return async (dispatch) => {
+    try {
+      console.log(formData)
+      const response3 = await axios.post(`http://localhost:3001/driver`,formData);
+      // Despachar una nueva acción con los datos obtenidos de la segunda petición
+      dispatch({ type: SET_DRIVER, payload: response3.data });
+      
+    } catch (error) {
+      console.error('Error fetching drivers:', error);
+    }
+  };
+};

@@ -1,0 +1,22 @@
+.container-buttons-paginacion {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    /* background-color: red; */
+}
+
+.button-prev, .button-next {
+    font-size: 20px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.button-prev:hover, .button-next:hover {
+    background-color: aliceblue;
+    color: #000;
+}

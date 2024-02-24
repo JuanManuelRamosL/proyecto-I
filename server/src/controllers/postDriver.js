@@ -4,24 +4,31 @@ const { Driver, Team } = require('../db');
 
 const postDriver = async (req, res) => {
   try {
-    const { nombre, apellido, descripcion, image, nationalidad, nacimiento, teams } = req.body;
+    const { nombre, apellido, descripcion, image, nationalidad, nacimiento, team } = req.body;
 
     // Crear el conductor en la base de datos
+    const teamInstance = await Team.findOne({ where: { nombre: team } });
+    const teamId = teamInstance ? teamInstance.id : null;
+
     const newDriver = await Driver.create({
       nombre,
       apellido,
       descripcion,
       image,
       nationalidad,
-      nacimiento
+      nacimiento,
+      team
     });
 
+    if (teamId) {
+      await newDriver.addTeam(teamId);
+    }
     // Asociar el conductor con los equipos solicitados
-    if (teams && teams.length > 0) {
-      const teamsToAdd = await Team.findAll({ where: { id: teams } });
+    /* if (team && team.length > 0) {
+      const teamsToAdd = await Team.findAll({ where: { id: team } });
       await newDriver.addTeams(teamsToAdd);
       console.log("bien")
-    }
+    } */
 
     res.status(201).json({ message: 'Driver created successfully', driver: newDriver });
   } catch (error) {

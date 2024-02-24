@@ -31,8 +31,11 @@ module.exports = (sequelize) => {
       allowNull: false
   },
   nacimiento: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.STRING,
       allowNull: false
+  },
+  team:{
+    type:DataTypes.STRING,
   }
 }, {
   // Opciones adicionales del modelo

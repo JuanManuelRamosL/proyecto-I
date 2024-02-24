@@ -1,9 +1,101 @@
 nav {
     width: 100%;
     height: 70px;
-    margin-top: 0px 0px 0px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: red;
+}
+
+.container-logo {
+    display: flex;
+    width: 50%;
+}
+
+.logo-f1 {
+    width: 200px;
+    height: auto;
+    border-radius: 100%;
+    /* animation: bounce 4s infinite alternate; */
+}
+
+@keyframes bounce {
+    0% {
+      transform: translateY(0); /* Estado inicial */
+    }
+    100% {
+      transform: translateY(-10px); /* Estado final, sube 20px */
+    }
+  }
+
+.container-buscador-filtro {
+    width: 50%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    margin-right: 265px;
+    /* background-color: red; */
+}
+
+.buscador {
+    width: 250px;
+    height: 29px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.button-buscar {
+    width: 100px;
+    height: 30px;
+    border-radius: 8px;
+    border: none;
+    margin-left: 10px;
+    margin-right: 30px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.texto-filtro {
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+#filtro-1 {
+    width: 170px;
+    height: 30px;
+    border: none;
+    border-radius: 8px;
+    margin-right: 15px;
+    outline: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#filtro-2 {
+    width: 240px;
+    height: 30px;
+    border: none;
+    border-radius: 8px;
+    margin-right: 15px;
+    outline: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#filtro-3 {
+    width: 110px;
+    height: 30px;
+    border: none;
+    border-radius: 8px;
+    margin-right: 15px;
+    outline: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
 }

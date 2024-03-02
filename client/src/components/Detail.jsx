@@ -1,7 +1,7 @@
 import React from 'react';
 import './Detail.css'
 
-const Detail = ({ driver }) => {
+const Detail = ({ driver,goBack  }) => {
   if (!driver) {
     return <div>Loading...</div>; // Manejar el caso cuando no hay información del corredor
   }
@@ -25,7 +25,7 @@ const Detail = ({ driver }) => {
           <p className='description-driver-details'>Description: {description}</p>
       </div>
     </div>
-
+<button onClick={goBack}>Volver</button>
   </>
   );
 };

@@ -18,6 +18,7 @@ export const fetchDriver = (name) => {
   return async (dispatch) => {
     try {
       const response2 = await axios.get(`http://localhost:3001/driverss/name?name=${name}`);
+      console.log(response2)
       // Despachar una nueva acción con los datos obtenidos de la segunda petición
       dispatch({ type: SET_DRIVER, payload: response2.data });
       

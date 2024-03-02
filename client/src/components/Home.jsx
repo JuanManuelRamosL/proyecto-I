@@ -12,7 +12,7 @@ const Home = () => {
   const[apiFilter,setApiFilter] = useState("")
   const [orden,setOrden] = useState("")
   const [selectedDriver, setSelectedDriver] = useState(null);
-  const [name,setName] = useState("");
+  const [name,setName] = useState(null);//aca esta el problema
   const [currentPage, setCurrentPage] = useState(1);
   const dispatch = useDispatch();
   const drivers = useSelector(state => state.drivers);
@@ -51,7 +51,7 @@ console.log(driver)
     setSelectedDriver(driver  );
     console.log(driver)
   };
-//tengo que hacer que el orden llegue como parametro aca desde nav
+
 const handleSort =(orden,normalizedDrivers)=>{
   if ("nombre_ASC" == orden) {
     filteredDrivers = normalizedDrivers.sort((a, b) => a.nombre.localeCompare(b.nombre));
@@ -138,8 +138,8 @@ const handleSort =(orden,normalizedDrivers)=>{
       {/* Mostrar el componente Detail si hay un conductor seleccionado */}
       {selectedDriver ? (
         <Detail driver={selectedDriver} goBack={() => setSelectedDriver(null)} />
-      ) : name ? (
-        <Name driver={driver}/>
+      ) : name == true ? (
+        <Name  driver={driver} goBack={() => setName(null)}/>
       ) : (
         <>
           <Card drivers={currentDrivers} onClick={handleDriverClick} />

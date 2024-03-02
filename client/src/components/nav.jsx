@@ -13,8 +13,17 @@ function Nav({setName,setTeamFilter,setApiFilter,setOrden}) {
     const handleSearch = () => {
       // Llama a la acción fetchDrivers y pasa el valor del input como parámetro
       dispatch(fetchDriver(searchValue));
-      console.log(searchValue)
-     setName(true)
+      console.log("dispatch realizado")
+      setTimeout(() => {
+        setName(true);
+      }, 2000);
+    };
+    
+    const handleKeyPress = (e) => {
+        // Verifica si la tecla presionada es "Enter" (código 13)
+        if (e.key === 'Enter') {
+            handleSearch();
+        }
     };
 
     const handleTeamFilterChange = (e) => {
@@ -31,6 +40,9 @@ function Nav({setName,setTeamFilter,setApiFilter,setOrden}) {
     const handleOrden =(e)=>{
         const data = e.target.value;
         setOrden(data)
+        console.log("orden",data)
+        setTeamFilter("")
+        setApiFilter("")
     }
 
     return (
@@ -45,7 +57,8 @@ function Nav({setName,setTeamFilter,setApiFilter,setOrden}) {
           placeholder='Search by My Name'
           className='buscador'
           value={searchValue}
-          onChange={(e) => setSearchValue(e.target.value)} />
+          onChange={(e) => setSearchValue(e.target.value)}
+          onKeyDown={handleKeyPress} />
 
 
                 <button className='button-buscar'onClick={handleSearch}>Search</button>
@@ -62,7 +75,7 @@ function Nav({setName,setTeamFilter,setApiFilter,setOrden}) {
                     <option value="Base de datos">Base De Datos</option>
                 </select>
                 <select name="" id="filtro-3" onChange={handleOrden}>
-        <option value="">Ordenar por:</option>
+        <option value="">Ordenar por defecto</option>
         <option value="nombre_ASC">Nombre Ascendente</option>
         <option value="nombre_DESC">Nombre Descendente</option>
         <option value="nacimiento_ASC">Fecha de Nacimiento Ascendente</option>

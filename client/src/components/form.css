@@ -1,0 +1,53 @@
+.form-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: black;
+  }
+  
+  .form-container label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .form-container input[type="text"],
+  .form-container input[type="url"],
+  .form-container textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .form-container textarea {
+    resize: vertical; /* Permite redimensionar verticalmente */
+  }
+  
+  .form-container button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #4caf50;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .form-container button[type="submit"]:hover {
+    background-color: #45a049;
+  }
+  
+  /* Estilos adicionales para la disposición de los elementos */
+  .form-container > div {
+    margin-bottom: 15px;
+  }
+  
+  .form-container > div:last-child {
+    margin-bottom: 0;
+  }
+  

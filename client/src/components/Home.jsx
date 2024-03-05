@@ -12,12 +12,13 @@ const Home = () => {
   const[apiFilter,setApiFilter] = useState("")
   const [orden,setOrden] = useState("")
   const [selectedDriver, setSelectedDriver] = useState(null);
-  const [name,setName] = useState(null);//aca esta el problema
+  const [name,setName] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const dispatch = useDispatch();
   const drivers = useSelector(state => state.drivers);
   const driver = useSelector(state => state.driver);
 
+  //trae los drivers cuando se abre home
   useEffect(() => {
     dispatch(fetchDrivers());
   }, [dispatch]);
@@ -47,11 +48,15 @@ console.log(driver)
     scrollAnimation();
   };
 
+
+  //funcion para pasarle a redux el driver sobre el que queremos el detail
   const handleDriverClick = (driver) => {
-    setSelectedDriver(driver  );
+    setSelectedDriver(driver);
     console.log(driver)
   };
 
+
+  //Funcion para ordenar los drivers
 const handleSort =(orden,normalizedDrivers)=>{
   if ("nombre_ASC" == orden) {
     filteredDrivers = normalizedDrivers.sort((a, b) => a.nombre.localeCompare(b.nombre));
@@ -76,6 +81,8 @@ const handleSort =(orden,normalizedDrivers)=>{
   }
 }
 
+
+//Filtrado de personajes
   let filteredDrivers;
   if (teamFilter) {
     filteredDrivers = drivers.filter(driver => {
@@ -110,24 +117,19 @@ const handleSort =(orden,normalizedDrivers)=>{
     
       return normalizedDriver;
     });
+    //pasamos los datos normalizados a la funcion de orden
     handleSort(orden,normalizedDrivers)
   } else {
     filteredDrivers = drivers;
   }
-//meter aca como un else if la logica de ordenar por nacimiento etc
 
 
-    // Cantidad de conductores por página
-    const driversPerPage = 9;
+  // Cantidad de conductores por página
+  const driversPerPage = 9;
   // Calcular los índices inicial y final de los conductores que se mostrarán en la página actual
   const indexOfLastDriver = currentPage * driversPerPage;
   const indexOfFirstDriver = indexOfLastDriver - driversPerPage;
   const currentDrivers = filteredDrivers.slice(indexOfFirstDriver, indexOfLastDriver);
-
-
-
-
-
 
 
 

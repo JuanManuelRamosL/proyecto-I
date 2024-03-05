@@ -1,10 +1,15 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 const Name = ({goBack}) => {
+
+  //trae el driver desde el estado global
   const driver = useSelector(state => state.driver);
+
+   // Manejar el caso cuando no hay información del corredor
   if (!driver) {
-    return <div>Loading...</div>; // Manejar el caso cuando no hay información del corredor
+    return <div>Loading...</div>;
   }
+  
   const {
     //code,
     name: { forename, surname },

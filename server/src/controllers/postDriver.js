@@ -4,10 +4,10 @@ const { Driver, Team } = require('../db');
 
 const postDriver = async (req, res) => {
   try {
-    const { nombre, apellido, descripcion, image, nationalidad, nacimiento, team } = req.body;
+    const { nombre, apellido, descripcion, image, nationalidad, nacimiento, teams } = req.body;
 
     // Crear el conductor en la base de datos
-    const teamInstance = await Team.findOne({ where: { nombre: team } });
+    const teamInstance = await Team.findOne({ where: { nombre: teams } });
     const teamId = teamInstance ? teamInstance.id : null;
 
     const newDriver = await Driver.create({
@@ -17,7 +17,7 @@ const postDriver = async (req, res) => {
       image,
       nationalidad,
       nacimiento,
-      team
+      teams
     });
 
     if (teamId) {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { postDriver } from '../redux/actions';
-
+import "./form.css"
 function Forms() {
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
@@ -11,7 +11,7 @@ function Forms() {
     "image": "",
     "nationalidad": "",
     "nacimiento": "",
-    "team": "",
+    "teams": "",
     
   });
 
@@ -33,6 +33,7 @@ function Forms() {
 
     return (
       <>
+       <div className="form-container">
   <form onSubmit={handleSubmit}>
       <div>
         <label htmlFor="nombre">Nombre:</label>
@@ -61,13 +62,14 @@ function Forms() {
       <div>
          <div>
         <label htmlFor="team">Equipos:</label>
-        <input type="text" id="team" name="team" value={formData.team} onChange={handleChange} required />
+        <input type="text" id="teams" name="teams" value={formData.team} onChange={handleChange} required />
       </div> 
       </div>
       <div>
         <button type="submit">Crear Driver</button>
       </div>
     </form>
+    </div>
       </>
     )
   }

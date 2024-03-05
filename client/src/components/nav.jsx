@@ -2,12 +2,14 @@ import './nav.css'
 import { useDispatch } from 'react-redux';
 import { fetchDriver } from '../redux/actions';
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 
 
 function Nav({setName,setTeamFilter,setApiFilter,setOrden}) {
     const [searchValue, setSearchValue] = useState(''); // Estado local para almacenar el valor del input
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     
   
     const handleSearch = () => {
@@ -26,17 +28,24 @@ function Nav({setName,setTeamFilter,setApiFilter,setOrden}) {
         }
     };
 
+
+    // Actualizar el estado local con el valor seleccionado del filtro por equipo
     const handleTeamFilterChange = (e) => {
         const selectedTeam = e.target.value;
-        setTeamFilter(selectedTeam); // Actualizar el estado local con el valor seleccionado del filtro por equipo
+        setTeamFilter(selectedTeam); 
     };
 
+
+    // Actualiza el estado local para ver el origen del driver(api,db)
     const handleOrigin = (e) => {
         const Origin = e.target.value;
         setApiFilter(Origin)
+        setTeamFilter("")
         console.log(Origin)
     }
 
+
+     // Actualiza el estado local para ordenar los drivers (nombre ,nacimiento)
     const handleOrden =(e)=>{
         const data = e.target.value;
         setOrden(data)
@@ -45,10 +54,17 @@ function Nav({setName,setTeamFilter,setApiFilter,setOrden}) {
         setApiFilter("")
     }
 
+    const handleForm = ()=>{
+        navigate("/form");
+    }
     return (
         <nav>
             <div className="container-logo">
                 <img src="./public/logo-f1-transparente.png" alt="" className='logo-f1' />
+                <div>
+                <button className='form' onClick={handleForm}>form</button>
+                </div>
+                
             </div>
             <div className="container-buscador-filtro">
 

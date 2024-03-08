@@ -1,6 +1,6 @@
 // actions.js
 import axios from 'axios';
-import { SET_DRIVERS,SET_DRIVER } from './reducer';
+import { SET_DRIVERS,SET_DRIVER, SET_TEAM } from './reducer';
 
 export const fetchDrivers = () => {
   return async (dispatch) => {
@@ -20,7 +20,21 @@ export const fetchDriver = (name) => {
       const response2 = await axios.get(`http://localhost:3001/driverss/name?name=${name}`);
       console.log(response2)
       // Despachar una nueva acción con los datos obtenidos de la segunda petición
-      dispatch({ type: SET_DRIVER, payload: response2.data });
+      dispatch({ type: SET_DRIVER, payload: response2.data});// el
+      
+    } catch (error) {
+      console.error('Error fetching drivers:', error);
+    }
+  };
+};
+
+export const fetchTeam = () => {
+  return async (dispatch) => {
+    try {
+      const responseT = await axios.get(`http://localhost:3001/teams`);
+      console.log(responseT)
+      // Despachar una nueva acción con los datos obtenidos de la segunda petición
+      dispatch({ type: SET_TEAM, payload: responseT.data });
       
     } catch (error) {
       console.error('Error fetching drivers:', error);

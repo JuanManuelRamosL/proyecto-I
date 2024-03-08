@@ -37,13 +37,34 @@
 }
 
 .img-driver-details {
-    width: 300px;
+    width: 360px;
     height: 400px;
     border-radius: 15px;
+    margin-top: -100px;
 }
 
 .txt-right-details {
     font-size: 20px;
     font-weight: bold;
     text-align: start;
+}
+
+.button-volver {
+    width: 70px;
+    height: 35px;
+    position: relative;
+    top: -55px;
+    left: 30px;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+.icon-volver {
+    font-size: 30px;
+    transition: 0.3s;
+}
+
+.icon-volver:hover {
+    transform: scale(1.1);
 }

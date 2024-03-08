@@ -1,10 +1,12 @@
 // reducers.js
 export const SET_DRIVERS = 'SET_DRIVERS';
 export const SET_DRIVER = "SET_DRIVER";
+export const SET_TEAM = "SET_TEAM";
 
 const initialState = {
   drivers: [],
-  driver:[]
+  driver:[],
+  team:[]
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -17,6 +19,10 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         driver: action.payload, // Puedes ajustar el nombre según sea necesario
+      }; case SET_TEAM:
+      return {
+        ...state,
+        team: action.payload, // Puedes ajustar el nombre según sea necesario
       };
     default:
       return state;

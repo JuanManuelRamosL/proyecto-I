@@ -33,13 +33,23 @@ const Detail = ({ driver,goBack  }) => {
     }
   }
 
+  function getNacionalidad(driver) {
+    if (driver.nationality) {
+      return `${driver.nationality}`;
+    } else if (driver.nationalidad) {
+      return `${driver.nationalidad}`;
+    } else {
+      return '';
+    }
+  }
   //Desestructuramos los datos de Driver para usarlos
   const { id,  nationality,  description, dob, teams } = driver;
 
   return (
   <>
       <h2 className='title-details'>Driver Detail</h2>
-
+      <button onClick={goBack} className='button-volver'><i class="fa-solid fa-circle-arrow-left icon-volver"></i></button>
+      
     <div className='container-details-driver'>
       <div className='container-details-left'>
       <img src={getImage(driver)} alt="Driver" className='img-driver-details' />
@@ -49,11 +59,10 @@ const Detail = ({ driver,goBack  }) => {
       <div className="container-details-right">
           <p className='txt-right-details'>ID: {id}</p>
           <p className='txt-right-details'>Name:  {getDriverName(driver)}</p>
-          <p className='txt-right-details'>Nationality: {nationality}</p>
+          <p className='txt-right-details'>Nationality: {getNacionalidad(driver)}</p>
           <p className='description-driver-details'>Description: {description}</p>
       </div>
     </div>
-<button onClick={goBack}>Volver</button>
   </>
   );
 };

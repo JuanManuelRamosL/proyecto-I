@@ -1,3 +1,7 @@
+.container-home {
+    background: linear-gradient(to right, #15151f 35%, #851000 90%);
+}
+
 .container-buttons-paginacion {
     display: flex;
     justify-content: center;

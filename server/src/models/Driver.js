@@ -25,7 +25,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false
   },
-  descripcion: {
+  description: {
       type: DataTypes.TEXT,
       allowNull: false
   },
@@ -37,7 +37,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false
   },
-  nacimiento: {
+  dob: {
       type: DataTypes.STRING,
       allowNull: false
   },

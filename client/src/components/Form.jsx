@@ -4,13 +4,14 @@ import { postDriver } from '../redux/actions';
 import "./form.css"
 function Forms() {
   const dispatch = useDispatch();
+  const [creado, setCreado] = useState(false);
   const [formData, setFormData] = useState({
     "nombre": "",
     "apellido": "",
-    "descripcion": "",
+    "description": "",
     "image": "",
     "nationalidad": "",
-    "nacimiento": "",
+    "dob": "",
     "teams": "",
     
   });
@@ -21,6 +22,7 @@ function Forms() {
       // Llama a la acción de Redux para enviar los datos del formulario
       console.log(formData)
       dispatch(postDriver(formData)); // Envía el objeto formData a la acción de Redux
+      setCreado(true)
     } catch (error) {
       console.error('Error creando el driver:', error);
     }
@@ -32,9 +34,9 @@ function Forms() {
   };
 
     return (
-      <>
+      <div className='container-crear-driver'>
        <div className="form-container">
-  <form onSubmit={handleSubmit}>
+  <form onSubmit={handleSubmit} className='form-original'>
       <div>
         <label htmlFor="nombre">Nombre:</label>
         <input type="text" id="nombre" name="nombre" value={formData.nombre} onChange={handleChange} required />
@@ -53,11 +55,11 @@ function Forms() {
       </div> 
       <div>
         <label htmlFor="fecha-nacimiento">Fecha de Nacimiento:</label>
-        <input type="text" id="fecha-nacimiento" name="nacimiento" value={formData.nacimiento} onChange={handleChange} required />
+        <input type="text" id="fecha-nacimiento" name="dob" value={formData.dob} onChange={handleChange} required />
       </div> 
       <div>
         <label htmlFor="descripcion">Descripción:</label>
-        <textarea id="descripcion" name="descripcion" value={formData.descripcion} onChange={handleChange} required></textarea>
+        <textarea id="descripcion" name="description" value={formData.description} onChange={handleChange} required></textarea>
       </div>
       <div>
          <div>
@@ -65,12 +67,16 @@ function Forms() {
         <input type="text" id="teams" name="teams" value={formData.team} onChange={handleChange} required />
       </div> 
       </div>
-      <div>
-        <button type="submit">Crear Driver</button>
+      <div className='container-button-crear'>
+        <button type="submit" className='button-crear-driver'>Crear Driver</button>
       </div>
     </form>
+
+    {creado ? (
+      <p className='texto-creado'>¡Corredor creado exitosamente!</p>
+    ): <div></div>}
     </div>
-      </>
+      </div>
     )
   }
   

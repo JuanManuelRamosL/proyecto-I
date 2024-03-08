@@ -5,6 +5,7 @@ const getDriversName = require("../controllers/getDriverName")
 const postDriver = require("../controllers/postDriver");
 const getTeams = require("../controllers/getTeam");
 const Name = require("../controllers/pruebaName");
+
 const router = Router();
 
 router.get('/drivers', getDriver);
@@ -13,4 +14,5 @@ router.get('/driverss/name', getDriversName);
 router.post('/driver', postDriver);
 router.get('/teams', getTeams);
 router.get('/prueba', Name);
+
 module.exports = router;

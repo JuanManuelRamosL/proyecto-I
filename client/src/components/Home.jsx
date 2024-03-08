@@ -6,6 +6,7 @@ import { fetchDrivers } from '../redux/actions';
 import Nav from './nav.jsx'
 import Name from './Name.jsx';
 import './Home.css'
+import axios from 'axios';
 
 const Home = () => {
   const [teamFilter, setTeamFilter] = useState('');
@@ -54,7 +55,6 @@ console.log(driver)
     setSelectedDriver(driver);
     console.log(driver)
   };
-
 
   //Funcion para ordenar los drivers
 const handleSort =(orden,normalizedDrivers)=>{
@@ -134,7 +134,7 @@ const handleSort =(orden,normalizedDrivers)=>{
 
 
   return (
-    <>
+    <div className='container-home'>
       <Nav setName={setName} setTeamFilter={setTeamFilter} setApiFilter={setApiFilter} setOrden={setOrden}></Nav>
   
       {/* Mostrar el componente Detail si hay un conductor seleccionado */}
@@ -154,9 +154,9 @@ const handleSort =(orden,normalizedDrivers)=>{
               <i className='fa-solid fa-chevron-right icono-next'></i>
             </button>
           </div>
-        </>
+        </> 
       )}
-    </>
+    </div>
   );
       }  
 export default Home

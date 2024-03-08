@@ -1,8 +1,9 @@
 import './nav.css'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchDriver } from '../redux/actions';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { fetchTeam } from '../redux/actions';
 
 
 
@@ -10,15 +11,19 @@ function Nav({setName,setTeamFilter,setApiFilter,setOrden}) {
     const [searchValue, setSearchValue] = useState(''); // Estado local para almacenar el valor del input
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const teams = useSelector(state => state.team);
+
+    useEffect(() => {
+        dispatch(fetchTeam());
+      }, [dispatch]);
     
-  
     const handleSearch = () => {
       // Llama a la acción fetchDrivers y pasa el valor del input como parámetro
       dispatch(fetchDriver(searchValue));
       console.log("dispatch realizado")
       setTimeout(() => {
         setName(true);
-      }, 2000);
+      }, 800);
     };
     
     const handleKeyPress = (e) => {
@@ -62,7 +67,7 @@ function Nav({setName,setTeamFilter,setApiFilter,setOrden}) {
             <div className="container-logo">
                 <img src="./public/logo-f1-transparente.png" alt="" className='logo-f1' />
                 <div>
-                <button className='form' onClick={handleForm}>form</button>
+                <button className='form' onClick={handleForm}>Form</button>
                 </div>
                 
             </div>
@@ -80,11 +85,9 @@ function Nav({setName,setTeamFilter,setApiFilter,setOrden}) {
                 <button className='button-buscar'onClick={handleSearch}>Search</button>
                 <p className='texto-filtro'>Filtros:</p>
                 <select name="" id="filtro-1" onChange={handleTeamFilterChange}>
-                    <option value="Red Bull">Red Bull</option>
-                    <option value="Ferrari">Ferrari</option>
-                    <option value="Mercedes">Mercedez Benz</option>
-                    <option value="BMW">BMW</option>
-                    <option value="">Base de Datos</option>
+                {teams && teams.teams && teams.teams.map(team => (
+    <option key={team.id} value={team.nombre}>{team.nombre}</option>
+  ))}
                 </select>
                 <select name="" id="filtro-2" onChange={handleOrigin}>
                     <option value="API">API</option>

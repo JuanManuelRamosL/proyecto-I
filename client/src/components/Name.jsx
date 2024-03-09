@@ -134,7 +134,7 @@ console.log(driver)
         <p>Fecha de nacimiento: {driver.dob}</p>
         <p>Equipos: {driver.teams}</p>
         <p>Descripción: {driver.description}</p>
-
+        <button onClick={goBack}>Volver</button>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 // actions.js
 import axios from 'axios';
-import { SET_DRIVERS,SET_DRIVER, SET_TEAM } from './reducer';
+import { SET_DRIVERS,SET_DRIVER, SET_TEAM, SET_DRIVER_N } from './reducer';
 
 export const fetchDrivers = () => {
   return async (dispatch) => {
@@ -13,6 +13,8 @@ export const fetchDrivers = () => {
     }
   };
 };
+
+
 
 export const fetchDriver = (name) => {
   return async (dispatch) => {
@@ -27,6 +29,23 @@ export const fetchDriver = (name) => {
     }
   };
 };
+
+//nueva rura driver
+export const fetchDriverN = (name) => {
+  return async (dispatch) => {
+    try {
+      const response3 = await axios.get(`http://localhost:3001/prueba/name?name=${name}`);
+      console.log(response3.data)
+      // Despachar una nueva acción con los datos obtenidos de la segunda petición
+      dispatch({ type: SET_DRIVER_N, payload: response3.data});// el
+      
+    } catch (error) {
+      console.error('Error fetching drivers:', error);
+    }
+  };
+};
+
+
 
 export const fetchTeam = () => {
   return async (dispatch) => {

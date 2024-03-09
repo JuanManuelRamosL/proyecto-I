@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { postDriver } from '../redux/actions';
 import "./form.css"
+import { useNavigate } from "react-router-dom";
 function Forms() {
   const dispatch = useDispatch();
   const [creado, setCreado] = useState(false);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     "nombre": "",
     "apellido": "",
@@ -16,7 +18,7 @@ function Forms() {
     
   });
 
-  const handleSubmit = async (event) => {
+/*   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       // Llama a la acción de Redux para enviar los datos del formulario
@@ -26,15 +28,39 @@ function Forms() {
     } catch (error) {
       console.error('Error creando el driver:', error);
     }
+  }; */
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      // Validar que los campos obligatorios no estén vacíos
+      if (!formData.nombre || !formData.apellido || !formData.nationalidad || !formData.dob) {
+        alert('Los campos nombre, apellido, nacionalidad y fecha de nacimiento son obligatorios.');
+        return;
+      }
+  
+  
+      // Llama a la acción de Redux para enviar los datos del formulario
+      console.log(formData)
+      dispatch(postDriver(formData)); // Envía el objeto formData a la acción de Redux
+      setCreado(true);
+    } catch (error) {
+      console.error('Error creando el driver:', error);
+    }
   };
+  
 
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
-
+//validar
+  const handleNavigate = ()=>{
+    navigate("/home");
+  }
     return (
       <div className='container-crear-driver'>
+         <button onClick={handleNavigate}><i class="fa-solid fa-circle-arrow-left icon-volver"></i></button>
        <div className="form-container">
   <form onSubmit={handleSubmit} className='form-original'>
       <div>
@@ -76,6 +102,7 @@ function Forms() {
       <p className='texto-creado'>¡Corredor creado exitosamente!</p>
     ): <div></div>}
     </div>
+   
       </div>
     )
   }

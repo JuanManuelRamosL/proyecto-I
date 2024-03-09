@@ -13,6 +13,6 @@ router.get('/drivers/:idDriver', getDriverId);
 router.get('/driverss/name', getDriversName);
 router.post('/driver', postDriver);
 router.get('/teams', getTeams);
-router.get('/prueba', Name);
+router.get('/prueba/name', Name);
 
 module.exports = router;

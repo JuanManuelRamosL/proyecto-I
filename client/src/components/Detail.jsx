@@ -53,14 +53,14 @@ const Detail = ({ driver,goBack  }) => {
     <div className='container-details-driver'>
       <div className='container-details-left'>
       <img src={getImage(driver)} alt="Driver" className='img-driver-details' />
-          <p className='txt-left-details'>Date of Birth: {dob}</p>
+          <p className='txt-left-details'>Cumpleaños: {dob}</p>
           <p className='txt-left-details'>Teams:  {getTeam(driver)}.</p>
       </div>
       <div className="container-details-right">
           <p className='txt-right-details'>ID: {id}</p>
-          <p className='txt-right-details'>Name:  {getDriverName(driver)}</p>
-          <p className='txt-right-details'>Nationality: {getNacionalidad(driver)}</p>
-          <p className='description-driver-details'>Description: {description}</p>
+          <p className='txt-right-details'>Nombre:  {getDriverName(driver)}</p>
+          <p className='txt-right-details'>Nacionalidad: {getNacionalidad(driver)}</p>
+          <p className='description-driver-details'>Descripcion: {description}</p>
       </div>
     </div>
   </>

@@ -1,13 +1,13 @@
 import './nav.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchDriver } from '../redux/actions';
+import { fetchDriver, fetchDriverN } from '../redux/actions';
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { fetchTeam } from '../redux/actions';
 
 
 
-function Nav({setName,setTeamFilter,setApiFilter,setOrden}) {
+function Nav({ setName,setTeamFilter,setApiFilter,setOrden}) {
     const [searchValue, setSearchValue] = useState(''); // Estado local para almacenar el valor del input
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -19,7 +19,8 @@ function Nav({setName,setTeamFilter,setApiFilter,setOrden}) {
     
     const handleSearch = () => {
       // Llama a la acción fetchDrivers y pasa el valor del input como parámetro
-      dispatch(fetchDriver(searchValue));
+      //dispatch(fetchDriver(searchValue));
+      dispatch(fetchDriverN(searchValue));
       console.log("dispatch realizado")
       setTimeout(() => {
         setName(true);

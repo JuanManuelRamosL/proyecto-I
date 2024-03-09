@@ -7,6 +7,8 @@ import Nav from './nav.jsx'
 import Name from './Name.jsx';
 import './Home.css'
 import axios from 'axios';
+import NameCards from './NombreBusqueda.jsx';
+
 
 const Home = () => {
   const [teamFilter, setTeamFilter] = useState('');
@@ -133,6 +135,7 @@ const handleSort =(orden,normalizedDrivers)=>{
 
 
 
+
   return (
     <div className='container-home'>
       <Nav setName={setName} setTeamFilter={setTeamFilter} setApiFilter={setApiFilter} setOrden={setOrden}></Nav>
@@ -141,7 +144,8 @@ const handleSort =(orden,normalizedDrivers)=>{
       {selectedDriver ? (
         <Detail driver={selectedDriver} goBack={() => setSelectedDriver(null)} />
       ) : name == true ? (
-        <Name  driver={driver} goBack={() => setName(null)}/>
+         //<Name  driver={driver} goBack={() => setName(null)}/>
+      <NameCards goBack={() => setName(null)}/>
       ) : (
         <>
           <Card drivers={currentDrivers} onClick={handleDriverClick} />

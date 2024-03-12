@@ -1,7 +1,8 @@
 import React from 'react';
 import './Card.css'
+import"./nombre-busq.css"
 import { useSelector } from 'react-redux';
-const NameCards = ({goBack}) => {
+const NameCards = ({goBack,onClick}) => {
     const driver = useSelector(state => state.driverN);
 
     console.log(driver)
@@ -36,18 +37,22 @@ const NameCards = ({goBack}) => {
   }
   return (
     <>
+  {driver.length > 0 ? (
     <div className="container-cards-drivers">
       {driver.map((driver, index) => (
-      <div key={index} className="driver-card" onClick={() => onClick(driver)}>
-        <img src={getImage(driver)}  className='img-driver' />
-        <div className="container-info-driver">
-          <h2 className='name-driver'>Nombre: {getDriverName(driver)}</h2>
-          <p className='escuderias-driver'>Escuderías: {getTeam(driver)}</p>
+        <div key={index} className="driver-card" onClick={() => onClick(driver)}>
+          <img src={getImage(driver)}  className='img-driver' />
+          <div className="container-info-driver">
+            <h2 className='name-driver'>Nombre: {getDriverName(driver)}</h2>
+            <p className='escuderias-driver'>Escuderías: {getTeam(driver)}</p>
+          </div>
         </div>
-      </div>
       ))}
-       <button onClick={goBack} className='button-volver'><i class="fa-solid fa-circle-arrow-left icon-volver"></i></button>
+      <button onClick={goBack} className='button-volver'><i class="fa-solid fa-circle-arrow-left icon-volver"></i></button>
     </div>
+  ) : (
+    <div className="no-drivers-message"> <p className='texto-err'>No hay conductores disponibles</p></div>
+  )}
 
     </>
   );

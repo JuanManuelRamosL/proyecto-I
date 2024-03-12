@@ -8,7 +8,6 @@ const getTeams = async (req, res) => {
 
     // Si no hay equipos en la base de datos, obtenerlos de la API y guardarlos en la base de datos
     if (teams.length === 0) {
-      // Obtener conductores de la API
       const response = await axios.get('http://localhost:5000/drivers');
       const drivers = response.data;
 
@@ -39,8 +38,5 @@ const getTeams = async (req, res) => {
     res.status(500).json({ error: 'Failed to get teams' });
   }
 };
-
-module.exports = getTeams;
-
 
 module.exports = getTeams;

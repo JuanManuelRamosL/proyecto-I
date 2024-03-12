@@ -63,6 +63,14 @@ function Nav({ setName,setTeamFilter,setApiFilter,setOrden}) {
     const handleForm = ()=>{
         navigate("/form");
     }
+
+    const handleClear = ()=>{
+        setName(null)
+        setTeamFilter("")
+        setApiFilter("")
+         setOrden("")
+    }
+
     return (
         <nav>
             <div className="container-logo">
@@ -76,18 +84,18 @@ function Nav({ setName,setTeamFilter,setApiFilter,setOrden}) {
 
 
                 <input  type="text"
-          placeholder='Search by My Name'
+          placeholder='Buscar por Nombre'
           className='buscador'
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
           onKeyDown={handleKeyPress} />
 
 
-                <button className='button-buscar'onClick={handleSearch}>Search</button>
+                <button className='button-buscar'onClick={handleSearch}>Buscar</button>
                 <p className='texto-filtro'>Filtros:</p>
                 <select name="" id="filtro-1" onChange={handleTeamFilterChange}>
                 {teams && teams.teams && teams.teams.map(team => (
-    <option key={team.id} value={team.nombre}>{team.nombre}</option>
+                     <option key={team.id} value={team.nombre}>{team.nombre}</option>
   ))}
                 </select>
                 <select name="" id="filtro-2" onChange={handleOrigin}>
@@ -102,6 +110,7 @@ function Nav({ setName,setTeamFilter,setApiFilter,setOrden}) {
         <option value="nacimiento_DESC">Fecha de Nacimiento Descendente</option>
       </select>
             </div>
+            <button className='clear' onClick={handleClear}><i class="fa-solid fa-arrows-rotate icon-clean"></i></button>
         </nav>
     )
 }

@@ -6,6 +6,7 @@ import Detail from "./components/Detail"
 import Forms from "./components/Form"
 import Name from "./components/Name"
 import './App.css'
+import Delete from './components/Delete';
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
           <Route path="/detail" element={<Detail />} />
           <Route path="/form" element={<Forms />} />
           <Route path="/name" element={<Name />} />
+          <Route path="/delete" element={<Delete />} />
         </Routes>
     </>
   )

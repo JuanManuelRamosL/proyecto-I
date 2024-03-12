@@ -1,0 +1,24 @@
+.no-drivers-message{
+    height: 492px;
+}
+
+.texto-err{
+    text-align: center;
+    font-size: 23px;
+    padding: 10px;
+    margin-left: 37%;
+    width: 350px;
+    height: 100px;
+    background-color: rgba(158, 158, 158, 0.1);
+    border-radius: 15px;
+    cursor: pointer;
+    transition:background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    backdrop-filter: blur(10px);
+}
+
+.texto-err:hover{
+    background-color: rgba(158, 158, 158, 0.3); /* Cambia el color de fondo */
+    transform: scale(1.04); /* Aumenta ligeramente el tamaño */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+}
+

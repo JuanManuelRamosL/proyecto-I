@@ -6,7 +6,6 @@ import { fetchDrivers } from '../redux/actions';
 import Nav from './nav.jsx'
 import Name from './Name.jsx';
 import './Home.css'
-import axios from 'axios';
 import NameCards from './NombreBusqueda.jsx';
 
 
@@ -84,7 +83,7 @@ const handleSort =(orden,normalizedDrivers)=>{
 }
 
 
-//Filtrado de personajes
+//Filtrado de corredores
   let filteredDrivers;
   if (teamFilter) {
     filteredDrivers = drivers.filter(driver => {
@@ -95,7 +94,10 @@ const handleSort =(orden,normalizedDrivers)=>{
       } else {
         return false;
       }
-    });
+    });  
+
+    
+
   } else if(apiFilter){
     if (apiFilter == "Base de datos") {
       filteredDrivers = drivers.filter(driver => driver.source === "Base de datos");
@@ -145,7 +147,7 @@ const handleSort =(orden,normalizedDrivers)=>{
         <Detail driver={selectedDriver} goBack={() => setSelectedDriver(null)} />
       ) : name == true ? (
          //<Name  driver={driver} goBack={() => setName(null)}/>
-      <NameCards goBack={() => setName(null)}/>
+      <NameCards goBack={() => setName(null)} onClick={handleDriverClick}/>
       ) : (
         <>
           <Card drivers={currentDrivers} onClick={handleDriverClick} />
@@ -154,6 +156,7 @@ const handleSort =(orden,normalizedDrivers)=>{
             <button onClick={goToPrevPage} disabled={currentPage === 1} className='button-prev'>
               <i className='fa-solid fa-chevron-left icono-prev'></i>
             </button>
+            <span>{`Pagina ${currentPage}`}</span>
             <button onClick={goToNextPage} disabled={indexOfLastDriver >= drivers.length} className='button-next'>
               <i className='fa-solid fa-chevron-right icono-next'></i>
             </button>

@@ -5,6 +5,8 @@ const getDriversName = require("../controllers/getDriverName")
 const postDriver = require("../controllers/postDriver");
 const getTeams = require("../controllers/getTeam");
 const Name = require("../controllers/pruebaName");
+const deleteDriver = require("../controllers/deleteDriver");
+const deleteDriverN = require("../controllers/deleteName");
 
 const router = Router();
 
@@ -14,5 +16,6 @@ router.get('/driverss/name', getDriversName);
 router.post('/driver', postDriver);
 router.get('/teams', getTeams);
 router.get('/prueba/name', Name);
-
+router.delete('/delete', deleteDriver);
+router.delete('/delete-name', deleteDriverN);
 module.exports = router;

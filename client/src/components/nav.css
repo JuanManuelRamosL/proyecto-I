@@ -20,6 +20,7 @@ nav {
     border-radius: 100%;
     /* animation: bounce 4s infinite alternate; */
 }
+
 .form{
     margin-top: 42px;
     width: 100px;
@@ -27,9 +28,10 @@ nav {
     border-radius: 8px;
     border: none;
     margin-left: 40px;
-    margin-right: 30px;
-    font-size: 15px;
+    margin-right: 10px;
+    font-size: 16px;
     font-weight: bold;
+    align-items: center;
     cursor: pointer;
 }
 @keyframes bounce {
@@ -112,4 +114,22 @@ nav {
     cursor: pointer;
     font-size: 16px;
     font-weight: bold;
+}
+
+.clear{
+   position: relative;
+   right: 30px;
+   background-color: transparent;
+   border:none;
+   transition: 0.2s;
+   cursor: pointer;
+}
+
+.clear:hover{
+    scale: 1.1;
+}
+
+.icon-clean{
+    font-size: 25px;
+
 }

@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { postDriver } from '../redux/actions';
 import "./form.css"
 import { useNavigate } from "react-router-dom";
+import { fetchTeam } from '../redux/actions';
 function Forms() {
   const dispatch = useDispatch();
+  const teams = useSelector(state => state.team);
   const [creado, setCreado] = useState(false);
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
@@ -15,7 +17,7 @@ function Forms() {
     "image": "",
     "nationalidad": "",
     "dob": "",
-    "teams": "",
+    "teams": [],
     
   });
 
@@ -66,6 +68,7 @@ function Forms() {
     }
   }; */
 
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -86,9 +89,26 @@ function Forms() {
   
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
-    setErrors(validateForm({ ...formData, [name]: value }));
+    const { name, value } = event.target; 
+    if (name === "teams") {
+      // Seleccionar múltiples equipos, agregar o eliminar del array
+      const selectedTeam = event.target.value;
+      const currentTeams = formData.teams;
+      const index = currentTeams.indexOf(selectedTeam);
+      if (index === -1) {
+        // Si no está presente, agregar al array
+        setFormData({ ...formData, [name]: [...currentTeams, selectedTeam] });
+        setErrors(validateForm({ ...formData, [name]: value }));
+      } else {
+        // Si ya está presente, eliminar del array
+        const updatedTeams = [...currentTeams.slice(0, index), ...currentTeams.slice(index + 1)];
+        setFormData({ ...formData, [name]: updatedTeams });
+        setErrors(validateForm({ ...formData, [name]: value }));
+      }
+    } else {
+      setFormData({ ...formData, [name]: value });
+      setErrors(validateForm({ ...formData, [name]: value }));
+    }
   };
 //validar
   const handleNavigate = ()=>{
@@ -98,6 +118,13 @@ function Forms() {
   const handleNavigate2 = ()=>{
     navigate("/delete")
   }
+  useEffect(() => {
+  console.log(formData)
+  }, [formData]);
+
+  useEffect(() => {
+    dispatch(fetchTeam());
+  }, [dispatch]);
     return (
       <div className='container-crear-driver'>
         <div className="container-buttons-form">
@@ -138,15 +165,21 @@ function Forms() {
         <textarea id="descripcion" name="description" value={formData.description} onChange={handleChange}></textarea>
       </div>
       <div>
-         <div>
-        <label htmlFor="team">Equipos:</label>
-        <input type="text" id="teams" name="teams" value={formData.teams} onChange={handleChange}/>
-        {errors.teams && <p className="error-message">{errors.teams}</p>}
-      </div> 
+
       </div>
+      <div>
+            <label htmlFor="teams">Equipos:</label>
+            <select multiple id="teams" name="teams" value={formData.teams} onChange={handleChange}>
+              {teams && teams.teams && teams.teams.map(team => (
+                <option key={team.id} value={team.nombre}>{team.nombre}</option>
+              ))}
+            </select>
+            {/* Puedes agregar validación de errores para equipos si es necesario */}
+          </div>
       <div className='container-button-crear'>
         <button type="submit" className='button-crear-driver'>Crear Driver</button>
       </div>
+    
     </form>
 
     {creado ? (

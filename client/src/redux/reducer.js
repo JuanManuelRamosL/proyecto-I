@@ -15,7 +15,7 @@ const initialState = {
   driverN:[],
   driverD:[],
   driverDN:[],
-  aux:[]
+  filteredDrivers: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -44,10 +44,10 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         driverDN: action.payload, 
-      };case SET_AUX:
+      };  case 'SET_FILTERED_DRIVERS':
       return {
         ...state,
-        aux: action.payload, 
+        filteredDrivers: action.payload,
       };
     default:
       return state;

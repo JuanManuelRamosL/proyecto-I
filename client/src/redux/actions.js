@@ -102,9 +102,12 @@ export const deleteDriverN = (formData) => {
   };
 };
 
-
+export const setFilteredDrivers = filteredDrivers => ({
+  type: 'SET_FILTERED_DRIVERS',
+  payload: filteredDrivers,
+});
 //prueba estado auxiliar para ordenamiento 
-export const aux = (data) => {
+/* export const aux = (data) => {
   return async (dispatch) => {
     try {
     
@@ -114,4 +117,4 @@ export const aux = (data) => {
       console.error('Error fetching drivers:', error);
     }
   };
-};
+}; */

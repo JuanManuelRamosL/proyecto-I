@@ -101,6 +101,7 @@ function Nav({ setName,setTeamFilter,setApiFilter,setOrden}) {
                 <select name="" id="filtro-2" onChange={handleOrigin}>
                     <option value="API">API</option>
                     <option value="Base de datos">Base De Datos</option>
+                   
                 </select>
                 <select name="" id="filtro-3" onChange={handleOrden}>
         <option value="">Ordenar por defecto</option>

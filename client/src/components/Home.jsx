@@ -20,6 +20,7 @@ const Home = () => {
   const drivers = useSelector(state => state.drivers);
   const driver = useSelector(state => state.driver);
 
+  const [filtros,setFiltros] = useState([])
   //trae los drivers cuando se abre home
   useEffect(() => {
     dispatch(fetchDrivers());
@@ -58,22 +59,26 @@ console.log(driver)
   };
 
   //Funcion para ordenar los drivers
-const handleSort =(orden,normalizedDrivers)=>{
+  //1 guardar los datos filtrados en un use state : x
+  //2 e ir borrando los que habia antes : x
+  //3 pasarle como parametro a handle sort el estado de los filtros : x
+  //4 darle un if para que sepa si tiene que ordenar por filtros o driver general 
+const handleSort =(orden,normalizedDrivers,filtros)=>{
   if ("nombre_ASC" == orden) {
-    filteredDrivers = normalizedDrivers.sort((a, b) => a.nombre.localeCompare(b.nombre));
-    console.log("nombre asc")
+    filteredDrivers = filtros.sort((a, b) => a.nombre.localeCompare(b.nombre));
+    console.log("nombre asc")      
   } else if ("nombre_DESC" == orden){
-    filteredDrivers = normalizedDrivers.sort((a, b) => b.nombre.localeCompare(a.nombre));
+    filteredDrivers = filtros.sort((a, b) => b.nombre.localeCompare(a.nombre));
     console.log("nombre desc")
   } else if ("nacimiento_ASC" == orden){
-   filteredDrivers = normalizedDrivers.sort((a, b) => {
+   filteredDrivers = filtros.sort((a, b) => {
       const dateA = new Date(a.nacimiento);
       const dateB = new Date(b.nacimiento);
       return dateA - dateB;
     });
     console.log("ncimiento asc")
   } else if ("nacimiento_DESC" == orden) {
-    filteredDrivers = normalizedDrivers.sort((a, b) => {
+    filteredDrivers = filtros.sort((a, b) => {
       const dateA = new Date(a.nacimiento);
       const dateB = new Date(b.nacimiento);
       return dateB - dateA; 
@@ -101,12 +106,11 @@ const handleSort =(orden,normalizedDrivers)=>{
   } else if(apiFilter){
     if (apiFilter == "Base de datos") {
       filteredDrivers = drivers.filter(driver => driver.source === "Base de datos");
-    } else {
+    } else if(apiFilter == "API") {
       filteredDrivers = drivers.filter(driver => driver.source === "API");
     }
-    
   }else if (orden){
-    const normalizedDrivers = drivers.map(driver => {
+    const normalizedDrivers = drivers.map(driver => { // no podria mapear el estado filtros que cree?
       const normalizedDriver = {
         id: driver.id,
         nombre: driver.nombre || `${driver.name.forename} ${driver.name.surname}`,
@@ -122,10 +126,36 @@ const handleSort =(orden,normalizedDrivers)=>{
       return normalizedDriver;
     });
     //pasamos los datos normalizados a la funcion de orden
-    handleSort(orden,normalizedDrivers)
+    handleSort(orden,normalizedDrivers,filtros)
   } else {
     filteredDrivers = drivers;
   }
+
+
+
+  useEffect(() => {
+    let normalizedDrivers = [];
+    if (filteredDrivers) {
+      // Normalizar los datos solo si hay conductores filtrados
+      normalizedDrivers = filteredDrivers.map(driver => ({
+        id: driver.id,
+        nombre: driver.nombre || `${driver.name.forename} ${driver.name.surname}`,
+        apellido: driver.apellido || driver.name.surname,
+        descripcion: driver.descripcion || driver.description,
+        image: driver.image.url || driver.image,
+        nacionalidad: driver.nacionalidad || driver.nationality,
+        nacimiento: driver.nacimiento || driver.dob,
+        source: driver.source,
+        teams: driver.teams || driver.team
+      }));
+    }
+    // Actualizar el estado filtros con los conductores normalizados
+    setFiltros(normalizedDrivers);
+  }, [ orden, apiFilter, teamFilter]);
+  
+useEffect(()=>{
+  console.log(filtros)
+},[filtros])
 
 
   // Cantidad de conductores por página
@@ -135,6 +165,10 @@ const handleSort =(orden,normalizedDrivers)=>{
   const indexOfFirstDriver = indexOfLastDriver - driversPerPage;
   const currentDrivers = filteredDrivers.slice(indexOfFirstDriver, indexOfLastDriver);
 
+// Setear la página actual a 1 después de aplicar un filtro
+useEffect(() => {
+  setCurrentPage(1);
+}, [teamFilter, apiFilter, orden]);
 
 
 
@@ -167,3 +201,8 @@ const handleSort =(orden,normalizedDrivers)=>{
   );
       }  
 export default Home
+
+
+
+
+

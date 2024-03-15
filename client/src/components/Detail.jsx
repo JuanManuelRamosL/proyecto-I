@@ -38,6 +38,26 @@ const Detail = ({ driver,goBack  }) => {
       return `${driver.nationality}`;
     } else if (driver.nationalidad) {
       return `${driver.nationalidad}`;
+    } else if (driver.nacionalidad) {
+      return `${driver.nacionalidad}`
+    } else {
+      return '';
+    }
+  }
+  function getDob(driver) {
+    if (driver.dob) {
+      return `${driver.dob}`;
+    } else if (driver.nacimiento) {
+      return `${driver.nacimiento}`;
+    } else {
+      return '';
+    }
+  }
+  function getDesc(driver) {
+    if (driver.description) {
+      return `${driver.description}`;
+    } else if (driver.descripcion) {
+      return `${driver.descripcion}`;
     } else {
       return '';
     }
@@ -53,14 +73,15 @@ const Detail = ({ driver,goBack  }) => {
     <div className='container-details-driver'>
       <div className='container-details-left'>
       <img src={getImage(driver)} alt="Driver" className='img-driver-details' />
-          <p className='txt-left-details'>Cumpleaños: {dob}</p>
+          <p className='txt-left-details'>Cumpleaños: {getDob(driver)}</p>
           <p className='txt-left-details'>Teams:  {getTeam(driver)}.</p>
       </div>
       <div className="container-details-right">
           <p className='txt-right-details'>ID: {id}</p>
           <p className='txt-right-details'>Nombre:  {getDriverName(driver)}</p>
           <p className='txt-right-details'>Nacionalidad: {getNacionalidad(driver)}</p>
-          <p className='description-driver-details'>Descripcion: {description}</p>
+          <p className='description-driver-details'>Descripcion: {getDesc(driver)}</p>
+          <a href="">X</a> // si tengo tiempo eliminar driver de aca 
       </div>
     </div>
   </>
